@@ -33,7 +33,7 @@ Put `[lein-azkaban "0.1.0-SNAPSHOT"]` into the `:plugins` vector of your project
 
 ## License
 
-Copyright © 2014 FIXME
+Copyright © 2014 Soren Macbeth
 
 Distributed under the Eclipse Public License either version 1.0 or (at
 your option) any later version.
