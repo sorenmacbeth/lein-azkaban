@@ -46,7 +46,7 @@
   [project [flow]]
   (let [config (:azkaban project)]
     (connect! (:endpoint config) (:username config) (:password config))
-    (with-endpoint (str (:endpoint config) "/manager")
+    (with-endpoint (str (:endpoint config) "/executor")
       (let [response (c/post *endpoint* {:form-params {:ajax "executeFlow"
                                                        :session.id *session-id*
                                                        :project (:project config)
@@ -55,6 +55,6 @@
           (let [body (:body response)
                 json (json/parse-string body true)]
             (if-let [error (:error json)]
-              (println (format "unable to execute flow %s: %s") flow error)
-              (println json)))
+              (println (format "unable to execute flow %s: %s" flow error))
+              (println (format "successfully executed flow '%s' with execution id: %d" (:flow json) (:execid json)))))
           (println (format "unable to connect to endpoint. got http code: %s" (:status response))))))))
