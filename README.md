@@ -6,10 +6,10 @@ A Leiningen plugin to do many wonderful things.
 
 Add a key called `:azkaban` to your project.clj containing the following keys:
 
-`:endpoint` - the location of the azkaban management server
-`:project` - the name of the project in azkaban
-`:username` - the username to authenticate to azkaban as
-`:password` - the password to authenticate to azkaban with
+* `:endpoint` - the location of the azkaban management server
+* `:project` - the name of the project in azkaban
+* `:username` - the username to authenticate to azkaban as
+* `:password` - the password to authenticate to azkaban with
 
 ```clojure
 {:azkaban {
