@@ -1,6 +1,6 @@
 # lein-azkaban
 
-A Leiningen plugin to do many wonderful things.
+A Leiningen plugin to interact with (Azkaban)[http://azkaban.github.io].
 
 ## Usage
 
@@ -21,19 +21,15 @@ Add a key called `:azkaban` to your project.clj containing the following keys:
 ```
 Currently the only supported command is `lein azkaban upload <file>` where `<file>` is a path to your project zip archive.
 
-FIXME: Use this for user-level plugins:
+Use this for user-level plugins:
 
 Put `[lein-azkaban "0.1.0-SNAPSHOT"]` into the `:plugins` vector of your
 `:user` profile, or if you are on Leiningen 1.x do `lein plugin install
 lein-azkaban 0.1.0-SNAPSHOT`.
 
-FIXME: Use this for project-level plugins:
+Use this for project-level plugins:
 
 Put `[lein-azkaban "0.1.0-SNAPSHOT"]` into the `:plugins` vector of your project.clj.
-
-FIXME: and add an example usage that actually makes sense:
-
-    $ lein azkaban
 
 ## License
 
