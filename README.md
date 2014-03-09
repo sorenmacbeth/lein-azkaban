@@ -19,7 +19,10 @@ Add a key called `:azkaban` to your project.clj containing the following keys:
     :password "mypass"
     }}
 ```
-Currently the only supported command is `lein azkaban upload <file>` where `<file>` is a path to your project zip archive.
+Supported commands are:
+
+* `lein azkaban upload <file>` where `<file>` is a path to your project zip archive.
+* `lein azkaban execute <flow>` where `<flow>` is the name of a flow in the azkaban project.
 
 Use this for user-level plugins:
 
