@@ -1,6 +1,6 @@
 # lein-azkaban
 
-A Leiningen plugin to interact with (Azkaban)[http://azkaban.github.io].
+A Leiningen plugin to interact with [Azkaban](http://azkaban.github.io).
 
 ## Usage
 
