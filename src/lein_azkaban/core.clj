@@ -21,7 +21,8 @@
             (if (= (:status json) "success")
               (alter-var-root (var *session-id*) (constantly (:session.id json)))
               (println "authentication failed!")))
-          (println (format "unable to connect to endpoint. got http code: %s" (:status response))))))))
+          (println
+           (format "unable to connect to endpoint. got http code: %s" (:status response))))))))
 
 (defn upload
   "Upload a project archive at `path`."
@@ -38,8 +39,10 @@
         (if (= (:status response) 200)
           (let [body (:body response)
                 json (json/parse-string body true)]
-            (println (format "successfully uploaded %s project. new version: %s" (:project config) (:version json))))
-          (println (format "unable to connect to endpoint. got http code: %s" (:status response))))))))
+            (println
+             (format "successfully uploaded %s project. new version: %s" (:project config) (:version json))))
+          (println
+           (format "unable to connect to endpoint. got http code: %s" (:status response))))))))
 
 (defn execute
   "Execute a flow named `flow`."
@@ -55,6 +58,9 @@
           (let [body (:body response)
                 json (json/parse-string body true)]
             (if-let [error (:error json)]
-              (println (format "unable to execute flow %s: %s" flow error))
-              (println (format "successfully executed flow '%s' with execution id: %d" (:flow json) (:execid json)))))
-          (println (format "unable to connect to endpoint. got http code: %s" (:status response))))))))
+              (println
+               (format "unable to execute flow %s: %s" flow error))
+              (println
+               (format "successfully executed flow '%s' with execution id: %d" (:flow json) (:execid json)))))
+          (println
+           (format "unable to connect to endpoint. got http code: %s" (:status response))))))))
