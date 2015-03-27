@@ -4,5 +4,5 @@
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :eval-in-leiningen true
-  :dependencies [[clj-http "0.9.0"]
+  :dependencies [[clj-http "0.5.0"]
                  [cheshire "5.3.1"]])
