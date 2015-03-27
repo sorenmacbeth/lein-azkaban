@@ -46,8 +46,7 @@
                     (merge {:insecure? true
                             :multipart [{:name "session.id" :content *session-id*}
                                         {:name "ajax" :content "upload"}
-                                        {:name "project" :content
-                                         (or project (:project config))}
+                                        {:name "project" :content (:project config)}
                                         {:name "Content/type" :content "application/zip"}
                                         {:name "file" :content
                                          (clojure.java.io/file path)}]}
@@ -62,20 +61,27 @@
            (format "unable to connect to endpoint. got http code: %s"
                    (:status response))))))))
 
+(defn job-param-overrides
+  [kv-args]
+  (when kv-args
+    (let [job-options (apply hash-map kv-args)]
+      {:flowOverride job-options})))
+
 (defn execute
   "Execute a flow named `flow`."
-  [project [flow args]]
+  [project [flow & args]]
   (let [config (:azkaban project)
         proxy-config (make-proxy (:proxy config))]
     (connect! (:endpoint config) (:username config) (:password config) proxy-config)
     (with-endpoint (str (:endpoint config) "/executor")
       (let [response (c/post *endpoint*
                              (merge {:insecure? true
-                                     :form-params {:ajax "executeFlow"
-                                                   :session.id *session-id*
-                                                   :project (:project config)
-                                                   :flow flow}})
-                             proxy-config)]
+                                     :form-params (merge {:ajax "executeFlow"
+                                                          :session.id *session-id*
+                                                          :project (:project config)
+                                                          :flow flow}
+                                                         (job-param-overrides args))}
+                                    proxy-config))]
         (if (= (:status response) 200)
           (let [body (:body response)
                 json (json/parse-string body true)

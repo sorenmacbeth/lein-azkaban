@@ -22,7 +22,7 @@ Add a key called `:azkaban` to your project.clj containing the following keys:
 Supported commands are:
 
 * `lein azkaban upload <file>` where `<file>` is a path to your project zip archive.
-* `lein azkaban execute <flow>` where `<flow>` is the name of a flow in the azkaban project.
+* `lein azkaban execute <flow> <job_override>` where `<flow>` is the name of a flow in the azkaban project, `<job_override>` are key value pairs that override default job parameters for this execution.
 
 Use this for user-level plugins:
 
