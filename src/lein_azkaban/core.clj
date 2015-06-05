@@ -144,3 +144,34 @@
                (format "successfully scheduled flow '%s' with execution id: %d" (:flow json) (:execid json)))))
           (println
            (format "unable to connect to endpoint. got http code: %s" (:status response))))))))
+
+(defn log-param-overrides
+  [kv-args]
+  (when kv-args
+    (apply hash-map kv-args)))
+
+(defn get-log
+  "Retrieve the log for job `job` of execution id `execution`."
+  [project [execution job & args]]
+  (let [config (:azkaban project)
+        proxy-config (make-proxy (:proxy config))]
+    (connect! (:endpoint config) (:username config) (:password config) proxy-config)
+    (with-endpoint (str (:endpoint config) "/executor")
+      (let [response (c/post *endpoint*
+                             (merge {:insecure? true
+                                     :as :json
+                                     :form-params (merge {:ajax "fetchExecJobLogs"
+                                                          :session.id *session-id*
+                                                          :execid execution
+                                                          :jobId job
+                                                          :offset 0
+                                                          :length 16777216}
+                                                         (log-param-overrides args))}
+                                    proxy-config))]
+        (if (= (:status response) 200)
+          (if (-> response :body :error)
+            (println (format "azkaban reported error: %s" (-> response :body :error)))
+            (println (-> response :body :data)))
+          (println
+           (format "unable to connect to endpoint. got http code: %s"
+                   (:status response))))))))

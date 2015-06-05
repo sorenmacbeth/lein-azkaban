@@ -1,4 +1,4 @@
-(defproject lein-azkaban "0.1.2-SNAPSHOT"
+(defproject lein-azkaban "0.1.3-SNAPSHOT"
   :description "A Leiningen plugin for interacting with Azkaban"
   :url "https://github.com/sorenmacbeth/lein-azkaban"
   :license {:name "Eclipse Public License"
