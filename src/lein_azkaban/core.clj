@@ -8,7 +8,8 @@
 
 (defmacro with-endpoint [endpoint & body]
   `(binding [*endpoint* ~endpoint]
-     ~@body))
+     (do
+       ~@body)))
 
 (defn make-proxy [proxy-config]
   (when proxy-config
